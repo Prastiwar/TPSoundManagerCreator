@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEditor;
 using UnityEditor.SceneManagement;
+using TP_SoundManager;
 
 namespace TP_SoundManagerEditor
 {
@@ -10,8 +11,6 @@ namespace TP_SoundManagerEditor
         public static TPSoundManagerToolsWindow window;
 
         SerializedProperty SoundBundles;
-
-        GUIContent content0 = new GUIContent("Resolution Dropdown");
 
         Texture2D mainTexture;
         Texture2D tooltipTexture;
@@ -109,18 +108,8 @@ namespace TP_SoundManagerEditor
 
         void ShowBundles()
         {
-            //int length = list.arraySize;
-            //for (int i = 0; i < length; i++)
-            //{
-            //    GUILayout.BeginHorizontal();
-            //    EditorGUILayout.PropertyField(list.GetArrayElementAtIndex(i), GUIContent.none);
-            //    EditAsset(list, i);
-            //    RemoveAsset(list, i);
-            //    GUILayout.EndHorizontal();
-            //}
-            foreach (UnityEngine.Object element in TPSoundManagerDesigner.SoundCreator.SoundBundles)
+            foreach (Object element in TPSoundManagerDesigner.SoundCreator.SoundBundles)
             {
-                _object = element;
                 GUILayout.BeginHorizontal();
                 EditorGUILayout.ObjectField(element, typeof(TPSoundBundle), false);
                 EditAsset(element);
@@ -132,7 +121,7 @@ namespace TP_SoundManagerEditor
             if (GUI.changed)
                 SoundBundles.serializedObject.ApplyModifiedProperties();
         }
-        object _object;
+
         void RemoveAsset(Object obj)
         {
             if (GUILayout.Button("Remove", GUILayout.Width(60)))
@@ -140,7 +129,6 @@ namespace TP_SoundManagerEditor
                 string assetPath = AssetDatabase.GetAssetPath(obj);
                 AssetDatabase.MoveAssetToTrash(assetPath);
 
-                DrawTool();
                 TPSoundManagerDesigner.UpdateManager();
                 DrawTool();
             }
@@ -168,6 +156,7 @@ namespace TP_SoundManagerEditor
             AssetDatabase.CreateAsset(newObj, AssetDatabase.GenerateUniqueAssetPath(assetPath));
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
+            EditorUtility.SetDirty(newObj);
 
             Debug.Log(newObj.name + " created in Assets/" + TPSoundManagerDesigner.EditorData.BundlePath);
             TPSoundManagerDesigner.UpdateManager();

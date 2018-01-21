@@ -1,16 +1,15 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-[CreateAssetMenu(menuName ="TestBundle")]
-public class TPSoundBundle : ScriptableObject
+namespace TP_SoundManager
 {
-    [System.Serializable]
-    public struct TPSound
+    public class TPSoundBundle : ScriptableObject
     {
-        public string AudioClipName;
-        public AudioClip AudioClip;
+        [System.Serializable]
+        public struct TPSound
+        {
+            public string AudioClipName;
+            public AudioClip AudioClip;
+        }
+        public TPSound[] Sounds = new TPSound[0];
     }
-
-    public TPSound[] Sounds;
 }

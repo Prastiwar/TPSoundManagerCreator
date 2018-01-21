@@ -216,6 +216,7 @@ namespace TP_SoundManagerEditor
             if (SoundCreator)
             {
                 SoundCreator.Refresh();
+                SoundCreator.OnValidate();
                 EditorUtility.SetDirty(SoundCreator);
             }
             if (creator != null)
