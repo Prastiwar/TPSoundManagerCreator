@@ -100,8 +100,7 @@ namespace TP_SoundManagerEditor
             }
 
             EditorGUILayout.LabelField("Sound Bundles loaded:", GUILayout.Width(180));
-
-            TPSoundManagerDesigner.creator.Update();
+            
             SoundBundles.serializedObject.UpdateIfRequiredOrScript();
             ShowBundles();
         }
@@ -165,7 +164,7 @@ namespace TP_SoundManagerEditor
 
         void Update()
         {
-            if (EditorApplication.isCompiling)
+            if (EditorApplication.isCompiling || TPSoundManagerDesigner.SoundCreator == null)
                 this.Close();
         }
     }

@@ -219,7 +219,12 @@ namespace TP_SoundManagerEditor
                 SoundCreator.OnValidate();
                 EditorUtility.SetDirty(SoundCreator);
             }
+
+            if (SoundCreator)
+                creator = new SerializedObject(SoundCreator);
+
             if (creator != null)
+            if (creator.targetObject != null)
             {
                 creator.UpdateIfRequiredOrScript();
                 creator.ApplyModifiedProperties();

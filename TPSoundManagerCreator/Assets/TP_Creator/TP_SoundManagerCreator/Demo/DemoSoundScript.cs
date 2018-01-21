@@ -5,20 +5,23 @@ public class DemoSoundScript : MonoBehaviour
 {
     TPSoundManagerCreator creator;
     [SerializeField] TPSoundBundle SecondBundle;
+    [SerializeField] TPSoundBundle ThemeBundle;
 
     void Awake()
     {
         creator = FindObjectOfType<TPSoundManagerCreator>();
+        creator.ActualSoundBundleTheme = ThemeBundle;
+        creator.PlayTheme(0);
     }
 
     public void ChangeFirstBundle()
     {
-        creator.SetActualBundle(creator.GetBundleByName("FirstBundle"));
+        creator.ActualSoundBundleFX = creator.GetSoundBundleByName("FirstBundle");
     }
 
     public void ChangeSecondBundle()
     {
-        creator.SetActualBundle(SecondBundle);
+        creator.ActualSoundBundleFX = SecondBundle;
     }
 
     public void PlaySound()

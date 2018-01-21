@@ -1,10 +1,9 @@
-﻿using UnityEngine;
-using UnityEditor;
+﻿using UnityEditor;
 using TP_SoundManager;
 
 namespace TP_SoundManagerEditor
 {
-    //[CustomEditor(typeof(TPSoundManagerCreator))]
+    [CustomEditor(typeof(TPSoundManagerCreator))]
     public class TPSoundManagerCreatorEditor : ScriptlessSoundEditor
     {
         public override void OnInspectorGUI()

@@ -214,7 +214,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &329346500
 MonoBehaviour:
@@ -228,6 +228,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SecondBundle: {fileID: 11400000, guid: ad6c4d33cdf426c469e28898e5411b86, type: 2}
+  ThemeBundle: {fileID: 11400000, guid: 1703cf6accc88d04cba65bf1bde372a1, type: 2}
 --- !u!1 &659557932
 GameObject:
   m_ObjectHideFlags: 0
@@ -443,7 +444,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1436337133
 GameObject:
@@ -791,10 +792,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e38b0a207af3b794ea2a043c3a14f5b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ActualSoundBundle: {fileID: 0}
+  ActualSoundBundleFX: {fileID: 11400000, guid: 3620f6f84ce76134098bf1162a6313b6,
+    type: 2}
+  ActualSoundBundleTheme: {fileID: 11400000, guid: 3620f6f84ce76134098bf1162a6313b6,
+    type: 2}
   SoundBundles:
   - {fileID: 11400000, guid: 3620f6f84ce76134098bf1162a6313b6, type: 2}
   - {fileID: 11400000, guid: ad6c4d33cdf426c469e28898e5411b86, type: 2}
+  - {fileID: 11400000, guid: 1703cf6accc88d04cba65bf1bde372a1, type: 2}
 --- !u!82 &1840940755
 AudioSource:
   m_ObjectHideFlags: 0
@@ -887,7 +892,7 @@ Transform:
   m_Children:
   - {fileID: 1982862983}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1924159137
 GameObject:
@@ -1050,10 +1055,10 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -1209,7 +1214,7 @@ RectTransform:
   - {fileID: 1506596293}
   - {fileID: 1924159138}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
