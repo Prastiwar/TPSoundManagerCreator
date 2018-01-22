@@ -58,19 +58,52 @@ namespace TP_SoundManager
             if (ActualSoundBundleTheme == null) ActualSoundBundleTheme = SoundBundles[0];
         }
 
-        AudioClip FindClipByName(string name)
+
+        // **** Finders **** //
+
+        public AudioClip FindAudioClip(TPSoundBundle soundBundle, string nameOfClip)
         {
-            int length = ActualSoundBundleFX.Sounds.Length;
+            int length = soundBundle.Sounds.Length;
             for (int i = 0; i < length; i++)
             {
-                if (name == ActualSoundBundleFX.Sounds[i].AudioClipName)
+                if (nameOfClip == soundBundle.Sounds[i].AudioClipName)
                 {
-                    return ActualSoundBundleFX.Sounds[i].AudioClip;
+                    return soundBundle.Sounds[i].AudioClip;
                 }
             }
             return null;
         }
 
+        public AudioClip FindAudioClip(bool fromActualFX, string nameOfClip)
+        {
+            if(fromActualFX)
+                return FindAudioClip(ActualSoundBundleFX, nameOfClip);
+            else
+                return FindAudioClip(ActualSoundBundleTheme, nameOfClip);
+        }
+
+        public AudioClip FindAudioClip(bool fromActualFX, int index)
+        {
+            if(fromActualFX)
+                return ActualSoundBundleFX.Sounds[index].AudioClip;
+            else
+                return ActualSoundBundleTheme.Sounds[index].AudioClip;
+        }
+
+        public AudioClip FindAudioClip(string nameOfBundle, string nameOfClip)
+        {
+            TPSoundBundle bundle = GetSoundBundleByName(nameOfBundle);
+            int length = bundle.Sounds.Length;
+            for (int i = 0; i < length; i++)
+            {
+                if (nameOfClip == bundle.Sounds[i].AudioClipName)
+                {
+                    return bundle.Sounds[i].AudioClip;
+                }
+            }
+            return null;
+        }
+        
         public TPSoundBundle GetSoundBundleByName(string name)
         {
             int length = SoundBundles.Count;
@@ -84,7 +117,19 @@ namespace TP_SoundManager
             return null;
         }
 
+
+
         // *** FX **** //
+
+        public void PlayOneShot(string nameOfBundle, int index)
+        {
+            Source.PlayOneShot(GetSoundBundleByName(nameOfBundle).Sounds[index].AudioClip);
+        }
+
+        public void PlayOneShot(string nameOfBundle, string nameOfClip)
+        {
+            Source.PlayOneShot(FindAudioClip(nameOfBundle, nameOfClip));
+        }
 
         public void PlayOneShot(int index)
         {
@@ -93,7 +138,7 @@ namespace TP_SoundManager
 
         public void PlayOneShot(string nameOfClip)
         {
-            Source.PlayOneShot(FindClipByName(nameOfClip));
+            Source.PlayOneShot(FindAudioClip(true, nameOfClip));
         }
 
         public void Play()
@@ -121,22 +166,39 @@ namespace TP_SoundManager
             Source.UnPause();
         }
 
+
+
         // *** Theme *** //
 
-        public void PlayTheme(int index)
+        public void PlayTheme()
         {
             if (ThemeSource.isPlaying)
                 ThemeSource.Stop();
-            ThemeSource.clip = ActualSoundBundleTheme.Sounds[index].AudioClip;
             ThemeSource.Play();
+        }
+
+        public void PlayTheme(string nameOfBundle, int index)
+        {
+            ThemeSource.clip = GetSoundBundleByName(nameOfBundle).Sounds[index].AudioClip;
+            PlayTheme();
+        }
+
+        public void PlayTheme(string nameOfBundle, string nameOfClip)
+        {
+            ThemeSource.clip = FindAudioClip(nameOfBundle, nameOfClip);
+            PlayTheme();
+        }
+
+        public void PlayTheme(int index)
+        {
+            ThemeSource.clip = ActualSoundBundleTheme.Sounds[index].AudioClip;
+            PlayTheme();
         }
 
         public void PlayTheme(string nameOfClip)
         {
-            if (ThemeSource.isPlaying)
-                ThemeSource.Stop();
-            ThemeSource.clip = FindClipByName(nameOfClip);
-            ThemeSource.Play();
+            ThemeSource.clip = FindAudioClip(false, nameOfClip);
+            PlayTheme();
         }
 
         public void PlayTheme(ulong delay)
