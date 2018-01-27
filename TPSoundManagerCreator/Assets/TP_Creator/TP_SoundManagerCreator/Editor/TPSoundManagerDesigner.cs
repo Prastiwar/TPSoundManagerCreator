@@ -6,7 +6,7 @@ using UnityEditor.SceneManagement;
 namespace TP_SoundManagerEditor
 {
     [InitializeOnLoad]
-    public class TPSoundManagerDesigner : EditorWindow
+    internal class TPSoundManagerDesigner : EditorWindow
     {
         public static TPSoundManagerDesigner window;
         static string currentScene;
@@ -174,6 +174,8 @@ namespace TP_SoundManagerEditor
             }
             else
             {
+                ToggleDebugMode();
+                EditorGUILayout.Space();
                 ResetManager();
 
                 if (GUILayout.Button("Refresh and update", skin.button, GUILayout.Height(70)))
@@ -209,6 +211,15 @@ namespace TP_SoundManagerEditor
         {
             if (GUILayout.Button("Reset Manager", skin.button, GUILayout.Height(45)))
                 SoundCreator = null;
+        }
+
+        void ToggleDebugMode()
+        {
+            GUILayout.BeginHorizontal();
+            if (GUILayout.Button("Toggle Debug Mode", skin.button, GUILayout.Height(45)))
+                TPSoundManagerCreator.DebugMode = !TPSoundManagerCreator.DebugMode;
+            GUILayout.Toggle(TPSoundManagerCreator.DebugMode, GUIContent.none, GUILayout.Width(15));
+            GUILayout.EndHorizontal();
         }
 
         public static void UpdateManager()

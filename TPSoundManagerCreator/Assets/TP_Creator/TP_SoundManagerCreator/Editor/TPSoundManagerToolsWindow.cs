@@ -6,7 +6,7 @@ using TP_SoundManager;
 namespace TP_SoundManagerEditor
 {
     [InitializeOnLoad]
-    public class TPSoundManagerToolsWindow : EditorWindow
+    internal class TPSoundManagerToolsWindow : EditorWindow
     {
         public static TPSoundManagerToolsWindow window;
 
@@ -151,7 +151,7 @@ namespace TP_SoundManagerEditor
 
             if (!AssetDatabase.IsValidFolder("Assets/" + TPSoundManagerDesigner.EditorData.BundlePath))
                 System.IO.Directory.CreateDirectory("Assets/" + TPSoundManagerDesigner.EditorData.BundlePath);
-
+            
             AssetDatabase.CreateAsset(newObj, AssetDatabase.GenerateUniqueAssetPath(assetPath));
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();

@@ -1,13 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEditor;
 using TP_SoundManager;
 
 namespace TP_SoundManagerEditor
 {
     [CustomEditor(typeof(TPSoundBundle))]
-    public class TPSoundBundleEditor : ScriptlessSoundEditor
+    internal class TPSoundBundleEditor : ScriptlessSoundEditor
     {
         TPSoundBundle SoundBundle;
         SerializedProperty list;
@@ -33,16 +31,13 @@ namespace TP_SoundManagerEditor
         public override void OnInspectorGUI()
         {
             serializedObject.UpdateIfRequiredOrScript();
-
+            
             DrawName();
             EditorGUILayout.Space();
             EditorGUILayout.Space();
             DrawSounds();
 
             serializedObject.ApplyModifiedProperties();
-            EditorGUILayout.Space();
-            EditorGUILayout.Space();
-            OpenCreator();
         }
 
         void RenameAsset()

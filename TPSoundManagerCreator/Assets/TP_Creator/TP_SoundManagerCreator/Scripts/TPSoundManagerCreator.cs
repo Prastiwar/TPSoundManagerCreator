@@ -6,11 +6,14 @@ namespace TP_SoundManager
     [RequireComponent(typeof(AudioSource))]
     public class TPSoundManagerCreator : MonoBehaviour
     {
+        public static bool DebugMode;
         public TPSoundBundle ActualSoundBundleFX;
         public TPSoundBundle ActualSoundBundleTheme;
+        public AudioSource Source { get { return _Source; } private set { _Source = value; } }
+        public AudioSource ThemeSource { get { return _ThemeSource; } private set { _ThemeSource = value; } }
+        [SerializeField] AudioSource _Source;
+        [SerializeField] AudioSource _ThemeSource;
         public List<TPSoundBundle> SoundBundles;
-        public AudioSource Source { get; private set; }
-        public AudioSource ThemeSource { get; private set; }
 
 #if UNITY_EDITOR
         public void OnValidate()
