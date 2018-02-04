@@ -1,7 +1,7 @@
 ﻿using UnityEditor;
-using TP_SoundManager;
+using TP.SoundManager;
 
-namespace TP_SoundManagerEditor
+namespace TP.SoundManagerEditor
 {
     [CustomEditor(typeof(TPSoundManagerCreator))]
     internal class TPSoundManagerCreatorEditor : ScriptlessSoundEditor

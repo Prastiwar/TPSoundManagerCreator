@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 using UnityEditor;
-using TP_SoundManager;
+using TP.SoundManager;
 using UnityEditor.SceneManagement;
 
-namespace TP_SoundManagerEditor
+namespace TP.SoundManagerEditor
 {
     [InitializeOnLoad]
     internal class TPSoundManagerDesigner : EditorWindow

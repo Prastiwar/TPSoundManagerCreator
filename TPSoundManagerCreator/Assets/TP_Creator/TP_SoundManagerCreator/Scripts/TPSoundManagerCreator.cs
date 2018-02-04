@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace TP_SoundManager
+namespace TP.SoundManager
 {
     [RequireComponent(typeof(AudioSource))]
     public class TPSoundManagerCreator : MonoBehaviour

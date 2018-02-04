@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace TP_SoundManager
+namespace TP.SoundManager
 {
     public class TPSoundBundle : ScriptableObject
     {

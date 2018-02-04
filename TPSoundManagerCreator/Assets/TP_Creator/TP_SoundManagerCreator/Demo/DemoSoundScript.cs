@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using TP_SoundManager;
+using TP.SoundManager;
 
 public class DemoSoundScript : MonoBehaviour
 {

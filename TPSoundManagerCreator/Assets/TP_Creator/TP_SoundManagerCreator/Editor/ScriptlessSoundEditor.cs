@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 using UnityEditor;
-using TP_SoundManager;
+using TP.SoundManager;
 
-namespace TP_SoundManagerEditor
+namespace TP.SoundManagerEditor
 {
     internal class ScriptlessSoundEditor : Editor
     {
