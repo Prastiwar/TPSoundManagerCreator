@@ -15,28 +15,6 @@ namespace TP.SoundManager
         [SerializeField] AudioSource _ThemeSource;
         public List<TPSoundBundle> SoundBundles;
 
-#if UNITY_EDITOR
-        public void OnValidate()
-        {
-            SoundBundles = FindAssetsByType<TPSoundBundle>();
-            Refresh();
-        }
-        List<T> FindAssetsByType<T>() where T : UnityEngine.Object
-        {
-            List<T> assets = new List<T>();
-            string[] guids = UnityEditor.AssetDatabase.FindAssets(string.Format("t:{0}", typeof(T)));
-            for (int i = 0; i < guids.Length; i++)
-            {
-                string assetPath = UnityEditor.AssetDatabase.GUIDToAssetPath(guids[i]);
-                T asset = UnityEditor.AssetDatabase.LoadAssetAtPath<T>(assetPath);
-                if (asset != null)
-                {
-                    assets.Add(asset);
-                }
-            }
-            return assets;
-        }
-#endif
 
         void Awake()
         {
@@ -46,6 +24,9 @@ namespace TP.SoundManager
         public void Refresh()
         {
             if (SoundBundles == null) SoundBundles = new List<TPSoundBundle>();
+#if UNITY_EDITOR
+            SoundBundles = Utilities.TPFind.FindAssetsByType<TPSoundBundle>();
+#endif
             if (Source == null)
             {
                 Source = GetComponent<AudioSource>();

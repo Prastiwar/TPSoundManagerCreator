@@ -2,6 +2,7 @@
 using UnityEditor;
 using TP.SoundManager;
 using UnityEditor.SceneManagement;
+using TP.Utilities;
 
 namespace TP.SoundManagerEditor
 {
@@ -38,7 +39,7 @@ namespace TP.SoundManagerEditor
             }
         }
 
-        public static TPSoundManagerGUIData EditorData;
+        public static TPEditorGUIData EditorData;
         public static TPSoundManagerCreator SoundCreator;
         public static GUISkin skin;
 
@@ -67,9 +68,13 @@ namespace TP.SoundManagerEditor
 
         void InitEditorData()
         {
+            string path = "Assets/TP_Creator/_CreatorResources/";
+            if (!System.IO.Directory.Exists(path))
+                System.IO.Directory.CreateDirectory(path);
+
             EditorData = AssetDatabase.LoadAssetAtPath(
-                   "Assets/TP_Creator/TP_SoundManagerCreator/EditorResources/SoundManagerEditorGUIData.asset",
-                   typeof(TPSoundManagerGUIData)) as TPSoundManagerGUIData;
+                   path + "SoundManagerEditorGUIData.asset",
+                   typeof(TPEditorGUIData)) as TPEditorGUIData;
             
             if (EditorData == null)
                 CreateEditorData();
@@ -81,21 +86,34 @@ namespace TP.SoundManagerEditor
 
         void CheckGUIData()
         {
+            if (EditorData.Paths == null)
+            {
+                EditorData.Paths = new string[1];
+            }
+
             if (EditorData.GUISkin == null)
                 EditorData.GUISkin = AssetDatabase.LoadAssetAtPath(
-                      "Assets/TP_Creator/TP_SoundManagerCreator/EditorResources/TPSoundGUISkin.guiskin",
+                      "Assets/TP_Creator/_CreatorResources/TPEditorGUISkin.guiskin",
                       typeof(GUISkin)) as GUISkin;
 
-            if (EditorData.BundlePath == null || EditorData.BundlePath.Length < 5)
-                EditorData.BundlePath = "TP_Creator/TP_SoundManagerCreator/AudioBundlesData/";
+            if (EditorData.Paths[0] == null || EditorData.Paths[0].Length < 5)
+                EditorData.Paths[0] = "Assets/TP_Creator/TP_SoundManagerCreator/AudioBundlesData/";
+
+            if (!System.IO.Directory.Exists(EditorData.Paths[0]))
+                System.IO.Directory.CreateDirectory(EditorData.Paths[0]);
+
+            if (EditorData.GUISkin == null)
+            {
+                Debug.LogError("There is no guiskin for TPEditor!");
+            }
 
             EditorUtility.SetDirty(EditorData);
         }
 
         void CreateEditorData()
         {
-            TPSoundManagerGUIData newEditorData = ScriptableObject.CreateInstance<TPSoundManagerGUIData>();
-            AssetDatabase.CreateAsset(newEditorData, "Assets/TP_Creator/TP_SoundManagerCreator/EditorResources/SoundManagerEditorGUIData.asset");
+            TPEditorGUIData newEditorData = ScriptableObject.CreateInstance<TPEditorGUIData>();
+            AssetDatabase.CreateAsset(newEditorData, "Assets/TP_Creator/_CreatorResources/SoundManagerEditorGUIData.asset");
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
             EditorData = newEditorData;
@@ -227,18 +245,22 @@ namespace TP.SoundManagerEditor
             if (SoundCreator)
             {
                 SoundCreator.Refresh();
-                SoundCreator.OnValidate();
                 EditorUtility.SetDirty(SoundCreator);
-            }
 
-            if (SoundCreator)
                 creator = new SerializedObject(SoundCreator);
+            }
 
             if (creator != null)
             if (creator.targetObject != null)
             {
                 creator.UpdateIfRequiredOrScript();
                 creator.ApplyModifiedProperties();
+            }
+
+            if (TPSoundManagerToolsWindow.window)
+            {
+                TPSoundManagerToolsWindow.window.Close();
+                TPSoundManagerToolsWindow.OpenToolWindow();
             }
         }
 

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311992, g: 0.38074034, b: 0.35872713, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311947, g: 0.38074005, b: 0.35872722, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -227,8 +227,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b50fe7413e202b842954a24534092fcc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SecondBundle: {fileID: 11400000, guid: ad6c4d33cdf426c469e28898e5411b86, type: 2}
-  ThemeBundle: {fileID: 11400000, guid: 1703cf6accc88d04cba65bf1bde372a1, type: 2}
+  SecondBundle: {fileID: 11400000, guid: fb0739161572cd440bf125c79e783d02, type: 2}
+  ThemeBundle: {fileID: 11400000, guid: a67ed99ae4055c141af9fec119b6d30f, type: 2}
 --- !u!1 &659557932
 GameObject:
   m_ObjectHideFlags: 0
@@ -783,7 +783,7 @@ GameObject:
   m_IsActive: 1
 --- !u!114 &1840940754
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 8
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1840940753}
@@ -792,14 +792,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e38b0a207af3b794ea2a043c3a14f5b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ActualSoundBundleFX: {fileID: 11400000, guid: 3620f6f84ce76134098bf1162a6313b6,
-    type: 2}
-  ActualSoundBundleTheme: {fileID: 11400000, guid: 3620f6f84ce76134098bf1162a6313b6,
-    type: 2}
+  ActualSoundBundleFX: {fileID: 0}
+  ActualSoundBundleTheme: {fileID: 0}
+  _Source: {fileID: 1840940755}
+  _ThemeSource: {fileID: 1982862984}
   SoundBundles:
-  - {fileID: 11400000, guid: 3620f6f84ce76134098bf1162a6313b6, type: 2}
-  - {fileID: 11400000, guid: ad6c4d33cdf426c469e28898e5411b86, type: 2}
-  - {fileID: 11400000, guid: 1703cf6accc88d04cba65bf1bde372a1, type: 2}
+  - {fileID: 11400000, guid: 17caa38e547c6ec479af64c74055c157, type: 2}
+  - {fileID: 11400000, guid: fb0739161572cd440bf125c79e783d02, type: 2}
+  - {fileID: 11400000, guid: a67ed99ae4055c141af9fec119b6d30f, type: 2}
 --- !u!82 &1840940755
 AudioSource:
   m_ObjectHideFlags: 0

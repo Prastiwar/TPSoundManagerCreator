@@ -102,6 +102,8 @@ namespace TP.SoundManagerEditor
             EditorGUILayout.LabelField("Sound Bundles loaded:", GUILayout.Width(180));
             
             SoundBundles.serializedObject.UpdateIfRequiredOrScript();
+            if (GUI.changed)
+                SoundBundles.serializedObject.ApplyModifiedProperties();
             ShowBundles();
         }
 
@@ -114,7 +116,9 @@ namespace TP.SoundManagerEditor
                 EditAsset(element);
                 RemoveAsset(element);
                 GUILayout.EndHorizontal();
-                EditorUtility.SetDirty(element == null ? this : element);
+
+                if(element != null)
+                    EditorUtility.SetDirty(element);
             }
 
             if (GUI.changed)
@@ -143,23 +147,25 @@ namespace TP.SoundManagerEditor
 
         void CreateBundle()
         {
-            string assetPath = "Assets/" + TPSoundManagerDesigner.EditorData.BundlePath;
+            string assetPath = TPSoundManagerDesigner.EditorData.Paths[0];
+            string newAssetPath = assetPath;
             UnityEngine.Object newObj = null;
 
             newObj = ScriptableObject.CreateInstance<TPSoundBundle>();
-            assetPath += "/New Audio Bundle.asset";
+            newAssetPath += "New Audio Bundle.asset";
 
-            if (!AssetDatabase.IsValidFolder("Assets/" + TPSoundManagerDesigner.EditorData.BundlePath))
-                System.IO.Directory.CreateDirectory("Assets/" + TPSoundManagerDesigner.EditorData.BundlePath);
+            if (!AssetDatabase.IsValidFolder(assetPath))
+                System.IO.Directory.CreateDirectory(assetPath);
             
-            AssetDatabase.CreateAsset(newObj, AssetDatabase.GenerateUniqueAssetPath(assetPath));
+            AssetDatabase.CreateAsset(newObj, AssetDatabase.GenerateUniqueAssetPath(newAssetPath));
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
-            EditorUtility.SetDirty(newObj);
+            AssetDatabase.OpenAsset(newObj);
 
-            Debug.Log(newObj.name + " created in Assets/" + TPSoundManagerDesigner.EditorData.BundlePath);
+            Debug.Log(newObj.name + " created in " + TPSoundManagerDesigner.EditorData.Paths[0]);
             TPSoundManagerDesigner.UpdateManager();
             DrawTool();
+            ShowBundles();
         }
 
         void Update()
