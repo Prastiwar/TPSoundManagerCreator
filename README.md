@@ -1,6 +1,8 @@
+# **This is an archived repository. Probably you want to check my** [TPFramework](https://github.com/Prastiwar/TPFrameworkUnity) **where it is merged into.**
+
 # TPSoundManagerCreator
 A tool which allows you to create sound manager and manage your sounds.
-## TPSoundManagerCreator is _deprecated_ use [TPAudioPool](https://github.com/Prastiwar/TPAudioPool) instead.
+
 #### Full documentation: https://github.com/Prastiwar/TPSoundManagerCreator/blob/master/SoundManagerDocumentation.docx
 <br>
 <br>
